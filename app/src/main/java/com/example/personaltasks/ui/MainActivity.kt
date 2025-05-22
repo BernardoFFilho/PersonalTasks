@@ -26,10 +26,7 @@ class MainActivity : AppCompatActivity() {
         recyclerTasks = findViewById(R.id.recyclerTasks)
         recyclerTasks.layoutManager = LinearLayoutManager(this)
 
-        // Preenche a lista ao abrir a tela
         loadTasks()
-
-        // Ativa o menu de contexto (clique longo)
         registerForContextMenu(recyclerTasks)
     }
 
@@ -48,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Menu de opções (menu superior)
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
@@ -64,7 +60,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Menu de contexto (clique longo em tarefa)
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
         menu.setHeaderTitle("Opções da Tarefa")
