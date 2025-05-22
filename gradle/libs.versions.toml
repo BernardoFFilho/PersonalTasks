@@ -13,6 +13,7 @@ roomRuntimeAndroid = "2.7.1"
 recyclerview = "1.4.0"
 
 [libraries]
+constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
