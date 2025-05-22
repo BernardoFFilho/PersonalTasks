@@ -1,7 +1,10 @@
+import org.jetbrains.kotlin.gradle.internal.Kapt3GradleSubplugin.Companion.findKaptConfiguration
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -41,6 +44,7 @@ android {
 
 dependencies {
 
+    implementation(libs.room.ktx)
     implementation(libs.material)
     implementation(libs.constraintlayout)
     implementation(libs.androidx.core.ktx)
@@ -51,8 +55,9 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.androidx.room.common.jvm)
-    implementation(libs.androidx.room.runtime.android)
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
