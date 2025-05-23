@@ -9,14 +9,12 @@ lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"
 composeBom = "2024.09.00"
 roomCommonJvm = "2.7.1"
-roomRuntimeAndroid = "2.7.1"
 recyclerview = "1.4.0"
 appcompat = "1.7.0"
 room = "2.6.1"
-roomKtx = "2.6.1"
+ksp = "2.0.21-1.0.26"
 
 [libraries]
-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 material = "com.google.android.material:material:1.12.0"
 constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,11 +33,15 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version = "1.7.3" }
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt"}
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
