@@ -1,8 +1,7 @@
-import org.jetbrains.kotlin.gradle.internal.Kapt3GradleSubplugin.Companion.findKaptConfiguration
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinCompose)
+    alias(libs.plugins.androidApplication)
     alias(libs.plugins.ksp)
 }
 
@@ -29,6 +28,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -42,7 +42,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.room.ktx)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -55,16 +54,20 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    add("ksp", libs.room.compiler)
+
+    ksp(libs.room.compiler)
+
     implementation(libs.kotlin.coroutines.android)
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.appcompat)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
+
