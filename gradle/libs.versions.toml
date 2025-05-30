@@ -1,5 +1,5 @@
 [versions]
-agp = "8.9.1"
+agp = "8.8.0"
 kotlin = "2.1.21"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -43,5 +43,5 @@ kotlin-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-c
 
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-androidApplication = { id = "com.android.application", version = "8.4.2" }
+androidApplication = { id = "com.android.application", version = "8.8.0" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
