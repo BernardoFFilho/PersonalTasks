@@ -19,6 +19,7 @@ class TaskAdapter(
      * ViewHolder representa cada item visual da lista (1 tarefa)
      */
     inner class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val status: TextView = view.findViewById(R.id.txtStatus)
         val title: TextView = view.findViewById(R.id.txtTitle)
         val description: TextView = view.findViewById(R.id.txtDescription)
         val deadline: TextView = view.findViewById(R.id.txtDeadline)
@@ -49,10 +50,14 @@ class TaskAdapter(
         holder.title.text = task.title
         holder.description.text = task.description
         holder.deadline.text = task.deadline
+        holder.status.text = if (task.completed) "Cumprida ✅" else "Pendente ⏳"
     }
+
 
     /**
      * Retorna o total de itens na lista de tarefas
      */
     override fun getItemCount(): Int = tasks.size
+    
+    
 }
