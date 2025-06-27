@@ -46,4 +46,4 @@
    ```bash
    git clone https://github.com/seu-usuario/PersonalTasks.git
 
-## Desenvolvido por Bernardo Fernandes Filho como parte do projeto avaliativo da disciplina de Programação Mobile – IFSP.
+# Desenvolvido por Bernardo Fernandes Filho como parte do projeto avaliativo da disciplina de Programação Mobile – IFSP.
