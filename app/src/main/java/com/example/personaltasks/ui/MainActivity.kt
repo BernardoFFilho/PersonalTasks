@@ -56,6 +56,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, TaskFormActivity::class.java))
                 true
             }
+            R.id.menu_trash -> {
+                startActivity(Intent(this, ExcludedTasksActivity::class.java))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -72,22 +76,21 @@ class MainActivity : AppCompatActivity() {
         val task = selectedTask ?: return false
         return when (item.itemId) {
             1 -> {
-                // Editar
                 val intent = Intent(this, TaskFormActivity::class.java)
                 intent.putExtra("task", task)
                 startActivity(intent)
                 true
             }
             2 -> {
-                // Excluir
                 lifecycleScope.launch {
-                    TaskDatabase.getDatabase(this@MainActivity).taskDao().delete(task)
+                    val dao = TaskDatabase.getDatabase(this@MainActivity).taskDao()
+                    val updatedTask = task.copy(deleted = true)
+                    dao.update(updatedTask)
                     loadTasks()
                 }
                 true
             }
             3 -> {
-                // Detalhes
                 val intent = Intent(this, TaskFormActivity::class.java)
                 intent.putExtra("task", task)
                 intent.putExtra("viewOnly", true)
