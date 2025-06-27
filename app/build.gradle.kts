@@ -42,6 +42,9 @@ android {
 }
 
 dependencies {
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
     implementation(libs.room.ktx)
     implementation(libs.material)
     implementation(libs.constraintlayout)

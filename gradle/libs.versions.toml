@@ -14,8 +14,15 @@ appcompat = "1.7.0"
 room = "2.7.1"
 ksp = "2.1.21-2.0.1"
 kotlin-coroutines = "1.8.0"
+firebase-bom = "32.7.3"
+firebase-auth = "22.3.1"
+firebase-firestore = "24.11.0"
+google-services = "4.4.1"
 
 [libraries]
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebase-auth" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebase-firestore" }
 material = "com.google.android.material:material:1.12.0"
 constraintlayout = "androidx.constraintlayout:constraintlayout:2.2.1"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,7 +47,7 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 kotlin-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
 
 [plugins]
-
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 androidApplication = { id = "com.android.application", version.ref = "agp" }
