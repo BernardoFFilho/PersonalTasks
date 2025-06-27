@@ -11,6 +11,7 @@ import com.example.personaltasks.R
 import com.example.personaltasks.adapter.TaskAdapter
 import com.example.personaltasks.data.Task
 import com.example.personaltasks.data.TaskDatabase
+import com.example.personaltasks.repository.FirebaseRepository
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +34,11 @@ class MainActivity : AppCompatActivity() {
     private fun loadTasks() {
         lifecycleScope.launch {
             val dao = TaskDatabase.getDatabase(this@MainActivity).taskDao()
+            val repository = FirebaseRepository()
+
+            val remoteTasks = repository.fetchAll()
+            remoteTasks.forEach { dao.upsert(it) }
+
             tasks.clear()
             tasks.addAll(dao.getAllTasks())
 
@@ -86,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                     val dao = TaskDatabase.getDatabase(this@MainActivity).taskDao()
                     val updatedTask = task.copy(deleted = true)
                     dao.update(updatedTask)
+                    FirebaseRepository().syncUp(updatedTask)
                     loadTasks()
                 }
                 true
