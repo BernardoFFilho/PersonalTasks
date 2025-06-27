@@ -10,6 +10,9 @@ interface TaskDao {
     @Query("SELECT * FROM task_table WHERE deleted = 1")
     suspend fun getDeletedTasks(): List<Task>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun upsert(task: Task)
+
     @Insert
     suspend fun insert(task: Task)
 
