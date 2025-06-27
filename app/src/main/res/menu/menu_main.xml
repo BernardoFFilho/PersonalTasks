@@ -13,4 +13,10 @@
         android:title="Lixeira"
         android:icon="@android:drawable/ic_menu_delete"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_logout"
+        android:title="Sair"
+        android:icon="@android:drawable/ic_lock_power_off"
+        app:showAsAction="ifRoom" />
 </menu>

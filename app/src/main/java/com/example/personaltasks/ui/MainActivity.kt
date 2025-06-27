@@ -12,6 +12,7 @@ import com.example.personaltasks.adapter.TaskAdapter
 import com.example.personaltasks.data.Task
 import com.example.personaltasks.data.TaskDatabase
 import com.example.personaltasks.repository.FirebaseRepository
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -64,6 +65,12 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.menu_trash -> {
                 startActivity(Intent(this, ExcludedTasksActivity::class.java))
+                true
+            }
+            R.id.menu_logout -> {
+                FirebaseAuth.getInstance().signOut()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
