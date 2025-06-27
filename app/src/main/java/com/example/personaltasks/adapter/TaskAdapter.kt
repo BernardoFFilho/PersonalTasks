@@ -1,5 +1,6 @@
 package com.example.personaltasks.adapter
 
+import android.annotation.SuppressLint
 import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,7 @@ class TaskAdapter(
         val title: TextView = view.findViewById(R.id.txtTitle)
         val description: TextView = view.findViewById(R.id.txtDescription)
         val deadline: TextView = view.findViewById(R.id.txtDeadline)
+        val priority: TextView = view.findViewById(R.id.txtPriority)
 
         init {
             // Listener para clique longo — usado para abrir o menu de contexto
@@ -45,12 +47,15 @@ class TaskAdapter(
     /**
      * Associa os dados da tarefa com os elementos visuais (TextViews)
      */
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = tasks[position]
         holder.title.text = task.title
         holder.description.text = task.description
         holder.deadline.text = task.deadline
         holder.status.text = if (task.completed) "Cumprida ✅" else "Pendente ⏳"
+        holder.title.text = "[${task.priority}] ${task.title}"
+        holder.priority.text = task.priority
     }
 
 
@@ -58,6 +63,5 @@ class TaskAdapter(
      * Retorna o total de itens na lista de tarefas
      */
     override fun getItemCount(): Int = tasks.size
-    
-    
+
 }

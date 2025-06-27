@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PersonalTasks</string>
+
+    <string-array name="priorities_array">
+        <item>ALTA</item>
+        <item>MEDIA</item>
+        <item>BAIXA</item>
+    </string-array>
+
 </resources>

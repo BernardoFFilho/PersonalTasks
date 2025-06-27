@@ -11,7 +11,6 @@ data class Task(
     val description: String,
     val deadline: String,
     val completed: Boolean = false,
-    val deleted: Boolean = false
+    val deleted: Boolean = false,
+    val priority: String = "BAIXA"
 ) : Serializable
-
-//teste de configuração

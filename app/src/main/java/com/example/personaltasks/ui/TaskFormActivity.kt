@@ -19,8 +19,10 @@ class TaskFormActivity : AppCompatActivity() {
     private lateinit var edtDescription: EditText
     private lateinit var txtSelectedDate: TextView
     private lateinit var btnSave: Button
+    private lateinit var spinnerPriority: Spinner
 
     private var selectedDate: String = ""
+    private var selectedPriority: String = "BAIXA"
     private var taskToEdit: Task? = null
     private var viewOnly: Boolean = false
 
@@ -32,6 +34,16 @@ class TaskFormActivity : AppCompatActivity() {
         edtDescription = findViewById(R.id.edtDescription)
         txtSelectedDate = findViewById(R.id.txtSelectedDate)
         btnSave = findViewById(R.id.btnSave)
+        spinnerPriority = findViewById(R.id.spinnerPriority)
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.priorities_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerPriority.adapter = adapter
+        }
 
         val calendar = Calendar.getInstance()
         updateDateText(calendar)
@@ -59,19 +71,23 @@ class TaskFormActivity : AppCompatActivity() {
             edtDescription.setText(taskToEdit!!.description)
             txtSelectedDate.text = taskToEdit!!.deadline
             selectedDate = taskToEdit!!.deadline
+            val priorities = resources.getStringArray(R.array.priorities_array)
+            spinnerPriority.setSelection(priorities.indexOf(taskToEdit!!.priority))
+        }
 
-            if (viewOnly) {
-                edtTitle.isEnabled = false
-                edtDescription.isEnabled = false
-                txtSelectedDate.isEnabled = false
-                btnSave.isEnabled = false
-                btnSave.text = "Visualização"
-            }
+        if (viewOnly) {
+            edtTitle.isEnabled = false
+            edtDescription.isEnabled = false
+            txtSelectedDate.isEnabled = false
+            spinnerPriority.isEnabled = false
+            btnSave.isEnabled = false
+            btnSave.text = "Visualização"
         }
 
         btnSave.setOnClickListener {
             val title = edtTitle.text.toString().trim()
             val description = edtDescription.text.toString().trim()
+            selectedPriority = spinnerPriority.selectedItem.toString()
 
             if (title.isEmpty() || description.isEmpty() || selectedDate.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
@@ -84,16 +100,14 @@ class TaskFormActivity : AppCompatActivity() {
                 description = description,
                 deadline = selectedDate,
                 completed = taskToEdit?.completed ?: false,
-                deleted = taskToEdit?.deleted ?: false
+                deleted = taskToEdit?.deleted ?: false,
+                priority = selectedPriority
             )
 
             lifecycleScope.launch {
                 val dao = TaskDatabase.getDatabase(this@TaskFormActivity).taskDao()
-                if (taskToEdit == null) {
-                    dao.insert(newTask)
-                } else {
-                    dao.update(newTask)
-                }
+                if (taskToEdit == null) dao.insert(newTask)
+                else dao.update(newTask)
                 FirebaseRepository().syncUp(newTask)
                 finish()
             }

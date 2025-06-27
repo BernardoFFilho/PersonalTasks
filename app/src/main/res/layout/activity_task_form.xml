@@ -67,5 +67,12 @@
             android:layout_marginTop="12dp"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+        <Spinner
+            android:id="@+id/spinnerPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:spinnerMode="dropdown" />
+
     </LinearLayout>
 </ScrollView>
