@@ -13,3 +13,5 @@ data class Task(
     val completed: Boolean = false,
     val deleted: Boolean = false
 ) : Serializable
+
+//teste de configuração
