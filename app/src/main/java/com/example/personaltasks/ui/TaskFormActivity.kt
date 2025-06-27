@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.personaltasks.R
 import com.example.personaltasks.data.Task
 import com.example.personaltasks.data.TaskDatabase
+import com.example.personaltasks.repository.FirebaseRepository
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,11 +33,9 @@ class TaskFormActivity : AppCompatActivity() {
         txtSelectedDate = findViewById(R.id.txtSelectedDate)
         btnSave = findViewById(R.id.btnSave)
 
-        // Data atual por padrão
         val calendar = Calendar.getInstance()
         updateDateText(calendar)
 
-        // Date Picker
         txtSelectedDate.setOnClickListener {
             if (!viewOnly) {
                 DatePickerDialog(
@@ -52,7 +51,6 @@ class TaskFormActivity : AppCompatActivity() {
             }
         }
 
-        // Verifica se veio tarefa via intent
         taskToEdit = intent.getSerializableExtra("task") as? Task
         viewOnly = intent.getBooleanExtra("viewOnly", false)
 
@@ -85,7 +83,8 @@ class TaskFormActivity : AppCompatActivity() {
                 title = title,
                 description = description,
                 deadline = selectedDate,
-                completed = taskToEdit?.completed ?: false
+                completed = taskToEdit?.completed ?: false,
+                deleted = taskToEdit?.deleted ?: false
             )
 
             lifecycleScope.launch {
@@ -95,6 +94,7 @@ class TaskFormActivity : AppCompatActivity() {
                 } else {
                     dao.update(newTask)
                 }
+                FirebaseRepository().syncUp(newTask)
                 finish()
             }
         }
