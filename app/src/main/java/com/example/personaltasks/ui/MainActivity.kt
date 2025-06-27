@@ -1,8 +1,10 @@
 package com.example.personaltasks.ui
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,13 +70,24 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.menu_logout -> {
-                FirebaseAuth.getInstance().signOut()
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
+                confirmLogout()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun confirmLogout() {
+        AlertDialog.Builder(this)
+            .setTitle("Sair")
+            .setMessage("Tem certeza que deseja sair?")
+            .setPositiveButton("Sim") { _: DialogInterface, _: Int ->
+                FirebaseAuth.getInstance().signOut()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
     }
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
