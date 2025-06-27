@@ -11,6 +11,7 @@ import com.example.personaltasks.R
 import com.example.personaltasks.adapter.TaskAdapter
 import com.example.personaltasks.data.Task
 import com.example.personaltasks.data.TaskDatabase
+import com.example.personaltasks.repository.FirebaseRepository
 import kotlinx.coroutines.launch
 
 class ExcludedTasksActivity : AppCompatActivity() {
@@ -61,6 +62,7 @@ class ExcludedTasksActivity : AppCompatActivity() {
                     val dao = TaskDatabase.getDatabase(this@ExcludedTasksActivity).taskDao()
                     val restoredTask = task.copy(deleted = false)
                     dao.update(restoredTask)
+                    FirebaseRepository().syncUp(restoredTask)
                     loadExcludedTasks()
                 }
                 true
