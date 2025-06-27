@@ -4,8 +4,11 @@ import androidx.room.*
 
 @Dao
 interface TaskDao {
-    @Query("SELECT * FROM task_table")
+    @Query("SELECT * FROM task_table WHERE deleted = 0")
     suspend fun getAllTasks(): List<Task>
+
+    @Query("SELECT * FROM task_table WHERE deleted = 1")
+    suspend fun getDeletedTasks(): List<Task>
 
     @Insert
     suspend fun insert(task: Task)
